@@ -1,0 +1,14 @@
+/* Custom site styling for Tarefas */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.table > tbody > tr:hover {
+    background-color: #f1f5f9;
+}

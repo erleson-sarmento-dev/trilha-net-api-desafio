@@ -1,0 +1,37 @@
+@model TrilhaApiDesafio.Models.Tarefa
+@{
+    ViewData["Title"] = "Excluir Tarefa";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="card main-card p-4 p-md-5 border-danger border-opacity-25">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center bg-danger bg-opacity-10 text-danger rounded-circle p-3 mb-3" style="width: 70px; height: 70px;">
+                    <i class="bi bi-exclamation-triangle-fill fs-2"></i>
+                </div>
+                <h3 class="fw-bold text-danger mb-1">Confirmar Exclusão</h3>
+                <p class="text-muted small">Tem certeza que deseja excluir esta tarefa? Esta ação não pode ser desfeita.</p>
+            </div>
+
+            <div class="card bg-light border-0 p-3 mb-4 rounded-3">
+                <div class="fw-bold fs-5 text-dark mb-1">@Model.Titulo</div>
+                <p class="text-secondary small mb-2">@(string.IsNullOrWhiteSpace(Model.Descricao) ? "Sem descrição" : Model.Descricao)</p>
+                <div class="d-flex align-items-center justify-content-between pt-2 border-top small text-muted">
+                    <span><i class="bi bi-calendar3 me-1"></i> @Model.Data.ToString("dd/MM/yyyy HH:mm")</span>
+                    <span>Status: <strong>@Model.Status</strong></span>
+                </div>
+            </div>
+
+            <form asp-action="Deletar" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-end gap-2">
+                    <a asp-action="Index" class="btn btn-light px-4">Cancelar</a>
+                    <button type="submit" class="btn btn-danger px-4">
+                        <i class="bi bi-trash me-1"></i> Sim, Excluir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

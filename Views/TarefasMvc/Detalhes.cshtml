@@ -1,0 +1,64 @@
+@model TrilhaApiDesafio.Models.Tarefa
+@{
+    ViewData["Title"] = "Detalhes da Tarefa";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9">
+        <div class="card main-card p-4 p-md-5">
+            <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3">
+                <div>
+                    <span class="badge bg-light text-muted border mb-2">Tarefa #@Model.Id</span>
+                    <h3 class="fw-bold mb-1">@Model.Titulo</h3>
+                </div>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm rounded-pill">
+                    <i class="bi bi-arrow-left me-1"></i> Voltar
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <label class="text-muted small fw-semibold text-uppercase">Descrição</label>
+                <div class="p-3 bg-light rounded-3 mt-1 text-secondary" style="white-space: pre-line; min-height: 80px;">
+                    @(string.IsNullOrWhiteSpace(Model.Descricao) ? "Nenhuma descrição fornecida para esta tarefa." : Model.Descricao)
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6">
+                    <label class="text-muted small fw-semibold text-uppercase">Data Agendada</label>
+                    <div class="d-flex align-items-center gap-2 mt-1 fs-6">
+                        <i class="bi bi-calendar-event text-primary"></i>
+                        <span>@Model.Data.ToString("dd/MM/yyyy HH:mm")</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="text-muted small fw-semibold text-uppercase">Status Atual</label>
+                    <div class="mt-1">
+                        @if (Model.Status == TrilhaApiDesafio.Models.EnumStatusTarefa.Finalizado)
+                        {
+                            <span class="badge-finalizado">
+                                <i class="bi bi-check-circle"></i> Finalizado
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge-pendente">
+                                <i class="bi bi-clock-history"></i> Pendente
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+                <a asp-action="Index" class="btn btn-light px-4">Voltar</a>
+                <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-primary-custom text-white px-4">
+                    <i class="bi bi-pencil me-1"></i> Editar
+                </a>
+                <a asp-action="Deletar" asp-route-id="@Model.Id" class="btn btn-outline-danger px-4">
+                    <i class="bi bi-trash me-1"></i> Excluir
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
